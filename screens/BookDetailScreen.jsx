@@ -3,30 +3,31 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function BookDetailScreen() {
+export default function BookDetailScreen({route, navigation}) {
+   const { book } = route.params;
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
 
       <Image
-        source={require('../assets/image.png')}
+        source={book.image}
         style={styles.bookCover}
       />
 
-      <Text style={styles.title}>Other Words For Home</Text>
-      <Text style={styles.author}>Jasmine Warga</Text>
+      <Text style={styles.title}>{book.title}</Text>
+      <Text style={styles.author}>{book.author}</Text>
 
       <View style={styles.infoRow}>
-        <Text style={styles.infoText}>⭐ 4.5</Text>
-        <Text style={styles.infoText}>📄 341 Pages</Text>
-        <Text style={styles.infoText}>🌐 Eng</Text>
+        <Text style={styles.infoText}>{book.rating}</Text>
+        <Text style={styles.infoText}>{book.pages} Pages</Text>
+        <Text style={styles.infoText}>{book.language}</Text>
       </View>
 
       <Text style={styles.descriptionTitle}>Description</Text>
       <Text style={styles.description}>
-        Jude never thought she’d be leaving her beloved older brother and father behind, all the way...
+        {book.description}
       </Text>
 
       <TouchableOpacity style={styles.readButton}>
@@ -37,7 +38,7 @@ export default function BookDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#121212' },
+  container: { flex: 1, padding: 20, backgroundColor: '#f9f9f9' }, // Nền sáng
   backButton: { position: 'absolute', top: 40, left: 20, zIndex: 10 },
   bookCover: {
     width: 120,
@@ -47,14 +48,14 @@ const styles = StyleSheet.create({
     marginTop: 60
   },
   title: {
-    color: '#fff',
+    color: '#333', // màu chữ tối
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 10
   },
   author: {
-    color: '#bbb',
+    color: '#666', // xám nhạt
     fontSize: 14,
     textAlign: 'center',
     marginBottom: 10
@@ -65,22 +66,22 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   infoText: {
-    color: '#fff',
+    color: '#444',
     fontSize: 14
   },
   descriptionTitle: {
-    color: '#fff',
+    color: '#333',
     fontSize: 16,
     marginTop: 20,
     fontWeight: 'bold'
   },
   description: {
-    color: '#aaa',
+    color: '#555',
     marginTop: 6
   },
   readButton: {
     marginTop: 30,
-    backgroundColor: '#ff7043',
+    backgroundColor: '#4CAF50', // xanh lá sáng
     padding: 14,
     borderRadius: 10,
     alignItems: 'center'
